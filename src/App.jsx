@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import LessonPage from './pages/LessonPage'
 import ProgressPage from './pages/ProgressPage'
+import ReviewPage from './pages/ReviewPage'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/lesson/:lessonId" element={<LessonPage />} />
+          <Route path="/review" element={<ReviewPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -41,7 +41,7 @@ export default function PronunciationPractice({ lesson }) {
         Listen, then try saying it yourself. Speech recognition works best in Chrome.
       </p>
 
-      <div className="rounded-2xl bg-white border border-black/5 p-6 shadow-sm text-center">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-sm text-center">
         <p className="text-xs uppercase tracking-wide text-ink-900/40 mb-2">
           Phrase {index + 1} of {phrases.length}
         </p>

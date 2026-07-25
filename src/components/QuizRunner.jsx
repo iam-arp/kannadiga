@@ -17,10 +17,13 @@ export default function QuizRunner({ lesson }) {
 
   const isCorrect = () => {
     if (question.type === 'mcq') return selected === question.answer
+    if (question.type === 'truefalse') return selected === question.answer
     if (question.type === 'fill')
       return fuzzyMatch(fillValue, question.answer, question.altAnswers || []).isMatch
     return false
   }
+
+  const needsSelection = question.type === 'mcq' || question.type === 'truefalse'
 
   const handleSubmit = () => {
     if (answered) return
@@ -51,7 +54,7 @@ export default function QuizRunner({ lesson }) {
 
   if (finished) {
     return (
-      <div className="rounded-2xl bg-white border border-black/5 p-8 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-sm">
         <p className="text-4xl mb-2">{correctCount === lesson.quiz.length ? '🎉' : '📝'}</p>
         <h3 className="text-xl font-semibold">
           You scored {correctCount} / {lesson.quiz.length}
@@ -75,18 +78,18 @@ export default function QuizRunner({ lesson }) {
       <p className="text-sm text-ink-900/60 mb-4">
         Question {index + 1} of {lesson.quiz.length}
       </p>
-      <div className="rounded-2xl bg-white border border-black/5 p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-sm">
         <p className="font-medium text-lg mb-4">{question.question}</p>
 
         {question.type === 'mcq' && (
           <div className="space-y-2">
             {question.options.map((opt, i) => {
-              let style = 'border-black/10 hover:border-teal-300'
+              let style = 'border-ink-900/15 hover:border-teal-300'
               if (answered) {
-                if (i === question.answer) style = 'border-teal-500 bg-teal-50'
-                else if (i === selected) style = 'border-red-300 bg-red-50'
+                if (i === question.answer) style = 'border-teal-500 bg-teal-500/10'
+                else if (i === selected) style = 'border-red-500/40 bg-red-500/10'
               } else if (i === selected) {
-                style = 'border-teal-500 bg-teal-50'
+                style = 'border-teal-500 bg-teal-500/10'
               }
               return (
                 <button
@@ -110,17 +113,52 @@ export default function QuizRunner({ lesson }) {
             onChange={(e) => setFillValue(e.target.value)}
             disabled={answered}
             placeholder="Type your answer (transliteration)..."
-            className="w-full px-4 py-3 rounded-xl border border-black/10 focus:border-teal-500 outline-none disabled:bg-black/5"
+            className="w-full px-4 py-3 rounded-xl border border-ink-900/15 focus:border-teal-500 outline-none disabled:bg-ink-900/5"
           />
+        )}
+
+        {question.type === 'truefalse' && (
+          <div className="grid grid-cols-2 gap-3">
+            {[true, false].map((value) => {
+              let style = 'border-ink-900/15 hover:border-teal-300'
+              if (answered) {
+                if (value === question.answer) style = 'border-teal-500 bg-teal-500/10'
+                else if (value === selected) style = 'border-red-500/40 bg-red-500/10'
+              } else if (value === selected) {
+                style = 'border-teal-500 bg-teal-500/10'
+              }
+              return (
+                <button
+                  key={String(value)}
+                  type="button"
+                  disabled={answered}
+                  onClick={() => setSelected(value)}
+                  className={`px-4 py-3 rounded-xl border font-medium transition ${style}`}
+                >
+                  {value ? 'True' : 'False'}
+                </button>
+              )
+            })}
+          </div>
         )}
 
         {answered && (
           <div
             className={`mt-4 p-3 rounded-xl text-sm ${
-              isCorrect() ? 'bg-teal-50 text-teal-700' : 'bg-red-50 text-red-600'
+              isCorrect() ? 'bg-teal-500/10 text-teal-600' : 'bg-red-500/10 text-red-600'
             }`}
           >
-            {isCorrect() ? '✓ Correct!' : `✗ Correct answer: ${question.type === 'mcq' ? question.options[question.answer] : question.answer}`}
+            {isCorrect()
+              ? '✓ Correct!'
+              : `✗ Correct answer: ${
+                  question.type === 'mcq'
+                    ? question.options[question.answer]
+                    : question.type === 'truefalse'
+                      ? question.answer
+                        ? 'True'
+                        : 'False'
+                      : question.answer
+                }`}
             {question.explanation && (
               <p className="mt-1 text-ink-900/60">{question.explanation}</p>
             )}
@@ -132,7 +170,7 @@ export default function QuizRunner({ lesson }) {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={question.type === 'mcq' ? selected === null : !fillValue.trim()}
+              disabled={needsSelection ? selected === null : !fillValue.trim()}
               className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:opacity-40 transition"
             >
               Check answer

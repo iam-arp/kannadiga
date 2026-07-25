@@ -47,7 +47,7 @@ export default function DictationExercise({ lesson }) {
 
   if (finished) {
     return (
-      <div className="rounded-2xl bg-white border border-black/5 p-8 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-sm">
         <p className="text-4xl mb-2">{correctCount === lesson.dictation.length ? '🎧' : '✍️'}</p>
         <h3 className="text-xl font-semibold">
           You got {correctCount} / {lesson.dictation.length} right
@@ -73,7 +73,7 @@ export default function DictationExercise({ lesson }) {
       <p className="text-sm text-ink-900/60 mb-4">
         Listen and type what you hear, using English letters (transliteration).
       </p>
-      <div className="rounded-2xl bg-white border border-black/5 p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-sm">
         <p className="text-xs uppercase tracking-wide text-ink-900/40 mb-3">
           Phrase {index + 1} of {lesson.dictation.length}
         </p>
@@ -88,13 +88,13 @@ export default function DictationExercise({ lesson }) {
           onChange={(e) => setValue(e.target.value)}
           disabled={checked}
           placeholder="Type what you heard..."
-          className="w-full px-4 py-3 rounded-xl border border-black/10 focus:border-teal-500 outline-none disabled:bg-black/5"
+          className="w-full px-4 py-3 rounded-xl border border-ink-900/15 focus:border-teal-500 outline-none disabled:bg-ink-900/5"
         />
 
         {checked && (
           <div
             className={`mt-4 p-3 rounded-xl text-sm ${
-              result.isMatch ? 'bg-teal-50 text-teal-700' : 'bg-red-50 text-red-600'
+              result.isMatch ? 'bg-teal-500/10 text-teal-600' : 'bg-red-500/10 text-red-600'
             }`}
           >
             {result.isMatch ? '✓ Correct!' : `✗ Expected: ${item.translit}`}

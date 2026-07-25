@@ -1,7 +1,17 @@
 import { useCallback, useSyncExternalStore } from 'react'
+import { recordProgress } from './useGamification'
 
 const STORAGE_KEY = 'kannadiga-progress'
 const listeners = new Set()
+
+const XP = {
+  vocab: 15,
+  conversation: 15,
+  pronunciation: 20,
+  quiz: 25,
+  dictation: 20,
+  lessonComplete: 50,
+}
 
 function readStore() {
   try {
@@ -36,31 +46,64 @@ function updateLesson(lessonId, patch) {
   writeStore(next)
 }
 
+// A lesson counts as fully complete once all five activities are done.
+function isFullyDone(p) {
+  return !!(
+    p &&
+    p.vocabDone &&
+    p.conversationDone &&
+    p.pronunciationDone &&
+    p.quizDone &&
+    p.dictationDone
+  )
+}
+
+// Applies an activity-completion patch and awards XP + streak credit only the
+// first time that activity is completed, to prevent farming XP via retries.
+function completeActivity(lessonId, activityKey, extraPatch, xpAmount) {
+  const existing = cache.lessons[lessonId] || {}
+  const firstTime = !existing[activityKey]
+  const wasFullyComplete = isFullyDone(existing)
+
+  updateLesson(lessonId, { ...extraPatch, [activityKey]: true })
+
+  if (firstTime) {
+    const nowFullyComplete = isFullyDone(cache.lessons[lessonId])
+    const bonus = !wasFullyComplete && nowFullyComplete ? XP.lessonComplete : 0
+    recordProgress(xpAmount + bonus)
+  }
+}
+
 export function useProgress() {
   const store = useSyncExternalStore(subscribe, getSnapshot)
 
   const markVocabDone = useCallback((lessonId) => {
-    updateLesson(lessonId, { vocabDone: true })
+    completeActivity(lessonId, 'vocabDone', {}, XP.vocab)
   }, [])
 
   const markConversationDone = useCallback((lessonId) => {
-    updateLesson(lessonId, { conversationDone: true })
+    completeActivity(lessonId, 'conversationDone', {}, XP.conversation)
   }, [])
 
   const markPronunciationDone = useCallback((lessonId) => {
-    updateLesson(lessonId, { pronunciationDone: true })
+    completeActivity(lessonId, 'pronunciationDone', {}, XP.pronunciation)
   }, [])
 
   const saveQuizResult = useCallback((lessonId, correct, total) => {
     const existing = cache.lessons[lessonId] || {}
     const bestScore = Math.max(existing.quiz?.bestScore ?? 0, correct)
-    updateLesson(lessonId, { quiz: { correct, total, bestScore }, quizDone: true })
+    completeActivity(lessonId, 'quizDone', { quiz: { correct, total, bestScore } }, XP.quiz)
   }, [])
 
   const saveDictationResult = useCallback((lessonId, correct, total) => {
     const existing = cache.lessons[lessonId] || {}
     const bestScore = Math.max(existing.dictation?.bestScore ?? 0, correct)
-    updateLesson(lessonId, { dictation: { correct, total, bestScore }, dictationDone: true })
+    completeActivity(
+      lessonId,
+      'dictationDone',
+      { dictation: { correct, total, bestScore } },
+      XP.dictation,
+    )
   }, [])
 
   const getLessonProgress = useCallback(
@@ -69,10 +112,7 @@ export function useProgress() {
   )
 
   const isLessonComplete = useCallback(
-    (lessonId) => {
-      const p = store.lessons[lessonId]
-      return !!(p && p.vocabDone && p.conversationDone && p.quizDone && p.dictationDone)
-    },
+    (lessonId) => isFullyDone(store.lessons[lessonId]),
     [store],
   )
 

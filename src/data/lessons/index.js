@@ -16,6 +16,18 @@ import pharmacyDoctor from './15-pharmacy-doctor.js'
 import houseHunting from './16-house-hunting.js'
 import emergencies from './17-emergencies.js'
 import slangAndFestivals from './18-slang-and-festivals.js'
+import tellingTimeDays from './19-telling-time-days.js'
+import cabApps from './20-cab-apps.js'
+import bookingTickets from './21-booking-tickets.js'
+import salon from './22-salon.js'
+import gym from './23-gym.js'
+import makingPlans from './24-making-plans.js'
+import complimentsReactions from './25-compliments-reactions.js'
+import bankAtm from './26-bank-atm.js'
+import complaintsReturns from './27-complaints-returns.js'
+import watchmanSociety from './28-watchman-society.js'
+import templeReligious from './29-temple-religious.js'
+import proverbsIdioms from './30-proverbs-idioms.js'
 
 export const lessons = [
   greetings,
@@ -36,6 +48,18 @@ export const lessons = [
   houseHunting,
   emergencies,
   slangAndFestivals,
+  tellingTimeDays,
+  cabApps,
+  bookingTickets,
+  salon,
+  gym,
+  makingPlans,
+  complimentsReactions,
+  bankAtm,
+  complaintsReturns,
+  watchmanSociety,
+  templeReligious,
+  proverbsIdioms,
 ].sort((a, b) => a.order - b.order)
 
 export const getLesson = (id) => lessons.find((l) => l.id === id)

@@ -1,10 +1,20 @@
 export default {
   id: 'family-relationships',
-  order: 12,
+  order: 17,
   category: 'People & Talk',
   emoji: '👨‍👩‍👧‍👦',
   title: 'Family & Relationships Vocabulary',
   scenario: 'Talking about your family — words that come up constantly once people know you a little.',
+  difficulty: 'Beginner',
+  estimatedMinutes: 11,
+  grammarTip: {
+    title: 'Elder-sibling words as polite address',
+    body: '"Anna" (elder brother) and "akka" (elder sister) are used constantly to address people who aren\'t actually your siblings — an auto driver, a shopkeeper, a stranger close to your age. It\'s warmer than a name and safer than guessing status.',
+  },
+  cultureNote: {
+    title: 'Joint families are still the reference point',
+    body: 'Even in nuclear-family Bangalore households, questions about parents, in-laws, and extended family are routine small talk — asking about someone\'s "ooru" (hometown) and family often comes before asking about their job.',
+  },
   vocab: [
     { kannada: 'ಅಪ್ಪ', translit: 'Appa', english: 'Father' },
     { kannada: 'ಅಮ್ಮ', translit: 'Amma', english: 'Mother' },
@@ -18,6 +28,8 @@ export default {
     { kannada: 'ಮಗಳು', translit: 'Magalu', english: 'Daughter' },
     { kannada: 'ಅಜ್ಜ', translit: 'Ajja', english: 'Grandfather' },
     { kannada: 'ಅಜ್ಜಿ', translit: 'Ajji', english: 'Grandmother' },
+    { kannada: 'ಸಂಬಂಧಿಕರು', translit: 'Sambandhikaru', english: 'Relatives' },
+    { kannada: 'ಊರು', translit: 'Ooru', english: 'Hometown/native place' },
   ],
   conversation: [
     { speaker: 'Neighbor', kannada: 'ನಿಮ್ಮ ಮನೆಯಲ್ಲಿ ಯಾರ‍್ಯಾರು ಇದ್ದೀರಿ?', translit: 'Nimma maneyalli yaaryaaru iddeeri?', english: 'Who all are there in your household?' },
@@ -26,17 +38,26 @@ export default {
     { speaker: 'You', kannada: 'ಹೌದು, ಅಕ್ಕನ ಗಂಡ ಮೈಸೂರಿನಲ್ಲಿ ಕೆಲಸ ಮಾಡ್ತಾರೆ.', translit: 'Haudu, akkana ganda Mysoorinalli kelasa maadtaare.', english: "Yes, my sister's husband works in Mysore." },
     { speaker: 'Neighbor', kannada: 'ಅಜ್ಜ, ಅಜ್ಜಿ ಇದ್ದಾರಾ ಜೊತೆಗೆ?', translit: 'Ajja, ajji iddaaraa jotege?', english: 'Do your grandfather and grandmother live with you?' },
     { speaker: 'You', kannada: 'ಇಲ್ಲ, ಅವರು ಊರಿನಲ್ಲಿ ಇದ್ದಾರೆ.', translit: 'Illa, avaru oorinalli iddaare.', english: 'No, they live in our hometown.' },
+    { speaker: 'Neighbor', kannada: 'ನಿಮ್ಮ ಊರು ಎಲ್ಲಿ?', translit: 'Nimma ooru elli?', english: 'Where is your hometown?' },
+    { speaker: 'You', kannada: 'ನಮ್ಮ ಊರು ಮಂಡ್ಯ. ಸಂಬಂಧಿಕರು ಎಲ್ಲಾ ಅಲ್ಲೇ ಇದ್ದಾರೆ.', translit: 'Namma ooru Mandya. Sambandhikaru ella alle iddaare.', english: 'Our hometown is Mandya. All our relatives are there.' },
+    { speaker: 'Neighbor', kannada: 'ನಿಮ್ಮ ತಮ್ಮ ಏನು ಮಾಡ್ತಾನೆ?', translit: 'Nimma tamma enu maadtaane?', english: 'What does your younger brother do?' },
+    { speaker: 'You', kannada: 'ತಮ್ಮ ಇನ್ನೂ ಓದ್ತಿದಾನೆ, ಕಾಲೇಜಲ್ಲಿ.', translit: 'Tamma innu odtidaane, college-alli.', english: 'My younger brother is still studying, in college.' },
   ],
   quiz: [
     { type: 'mcq', question: '"Akka" means:', options: ['Younger sister', 'Elder sister', 'Mother', 'Grandmother'], answer: 1 },
     { type: 'mcq', question: '"Tamma" means:', options: ['Younger brother', 'Elder brother', 'Son', 'Father'], answer: 0 },
     { type: 'mcq', question: 'Which word means "Husband"?', options: ['Hendathi', 'Ganda', 'Appa', 'Anna'], answer: 1 },
+    { type: 'mcq', question: '"Ooru" refers to:', options: ['Your job', 'Your hometown/native place', 'Your relatives', 'Your neighborhood'], answer: 1 },
     { type: 'fill', question: 'Translate to Kannada (transliteration): "Grandmother"', answer: 'Ajji' },
     { type: 'fill', question: 'Translate to Kannada (transliteration): "Daughter"', answer: 'Magalu' },
+    { type: 'truefalse', question: '"Anna" and "Akka" are only ever used for your actual siblings, never for strangers.', answer: false, explanation: 'They\'re commonly used to warmly address any older male/female, even strangers.' },
+    { type: 'truefalse', question: '"Sambandhikaru" means "relatives".', answer: true },
   ],
   dictation: [
     { kannada: 'ನನ್ನ ಅಪ್ಪ, ಅಮ್ಮ', translit: 'Nanna appa, amma', english: 'My father, mother' },
     { kannada: 'ಅಕ್ಕನಿಗೆ ಮದುವೆ ಆಗಿದ್ಯಾ?', translit: 'Akkanige maduve aagidya?', english: 'Is your elder sister married?' },
     { kannada: 'ಅಜ್ಜ, ಅಜ್ಜಿ', translit: 'Ajja, ajji', english: 'Grandfather, grandmother' },
+    { kannada: 'ನಿಮ್ಮ ಊರು ಎಲ್ಲಿ?', translit: 'Nimma ooru elli?', english: 'Where is your hometown?' },
+    { kannada: 'ಸಂಬಂಧಿಕರು', translit: 'Sambandhikaru', english: 'Relatives' },
   ],
 }

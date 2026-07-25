@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 
 const SpeechRecognitionAPI =
   typeof window !== 'undefined'
@@ -21,13 +21,47 @@ function pickVoice() {
   return indianVoice || null
 }
 
+// Persisted, app-wide playback speed for text-to-speech.
+const RATE_KEY = 'kannadiga-speech-rate'
+export const SPEECH_RATES = [0.7, 0.85, 1]
+const rateListeners = new Set()
+
+function readRate() {
+  const stored = Number(typeof localStorage !== 'undefined' && localStorage.getItem(RATE_KEY))
+  return SPEECH_RATES.includes(stored) ? stored : 0.85
+}
+
+let rateCache = readRate()
+
+function writeRate(rate) {
+  rateCache = rate
+  localStorage.setItem(RATE_KEY, String(rate))
+  rateListeners.forEach((listener) => listener())
+}
+
+function subscribeRate(listener) {
+  rateListeners.add(listener)
+  return () => rateListeners.delete(listener)
+}
+
+function getRateSnapshot() {
+  return rateCache
+}
+
 export function useSpeech() {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const recognitionRef = useRef(null)
+  const rate = useSyncExternalStore(subscribeRate, getRateSnapshot)
 
   const ttsSupported = typeof window !== 'undefined' && !!window.speechSynthesis
   const sttSupported = !!SpeechRecognitionAPI
+
+  const cycleRate = useCallback(() => {
+    const currentIndex = SPEECH_RATES.indexOf(rateCache)
+    const next = SPEECH_RATES[(currentIndex + 1) % SPEECH_RATES.length]
+    writeRate(next)
+  }, [])
 
   const speak = useCallback(
     (text) => {
@@ -41,7 +75,7 @@ export function useSpeech() {
       } else {
         utterance.lang = 'kn-IN'
       }
-      utterance.rate = 0.85
+      utterance.rate = rateCache
       utterance.onstart = () => setIsSpeaking(true)
       utterance.onend = () => setIsSpeaking(false)
       utterance.onerror = () => setIsSpeaking(false)
@@ -97,5 +131,7 @@ export function useSpeech() {
     ttsSupported,
     sttSupported,
     hasKannadaVoice,
+    rate,
+    cycleRate,
   }
 }

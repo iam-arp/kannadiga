@@ -1,15 +1,31 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { categories } from '../data/categories'
 import { lessons, getLessonsByCategory } from '../data/lessons'
 import { useProgress } from '../hooks/useProgress'
+import { useReview, cardId } from '../hooks/useReview'
 import LessonCard from '../components/LessonCard'
 import ProgressRing from '../components/ProgressRing'
 
 export default function HomePage() {
-  const { isLessonComplete } = useProgress()
+  const { isLessonComplete, progress } = useProgress()
+  const { cards, getCardState } = useReview()
 
   const completedLessons = lessons.filter((l) => isLessonComplete(l.id))
   const nextLesson = lessons.find((l) => !isLessonComplete(l.id))
+
+  const dueCount = useMemo(() => {
+    const now = Date.now()
+    let count = 0
+    lessons.forEach((lesson) => {
+      if (!progress.lessons[lesson.id]?.vocabDone) return
+      lesson.vocab.forEach((_, i) => {
+        if (getCardState(cardId(lesson.id, i)).dueAt <= now) count += 1
+      })
+    })
+    return count
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progress, cards])
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -25,7 +41,13 @@ export default function HomePage() {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-3 bg-white/10 rounded-2xl px-4 py-3">
-            <ProgressRing completed={completedLessons.length} total={lessons.length} size={48} />
+            <ProgressRing
+              completed={completedLessons.length}
+              total={lessons.length}
+              size={48}
+              trackClassName="text-white/20"
+              labelClassName="text-white"
+            />
             <div className="text-sm">
               <p className="font-semibold">{completedLessons.length} / {lessons.length} lessons</p>
               <p className="text-teal-100">completed</p>
@@ -42,6 +64,22 @@ export default function HomePage() {
         </div>
       </section>
 
+      {dueCount > 0 && (
+        <Link
+          to="/review"
+          className="flex items-center justify-between gap-3 mb-8 rounded-2xl bg-saffron-500/10 border border-saffron-500/20 px-5 py-4 hover:border-saffron-500/40 transition"
+        >
+          <span className="flex items-center gap-3">
+            <span className="text-2xl">🗂️</span>
+            <span>
+              <span className="font-semibold text-saffron-600">{dueCount} words</span>{' '}
+              <span className="text-ink-900/70">are due for spaced-repetition review</span>
+            </span>
+          </span>
+          <span className="text-saffron-600 font-medium whitespace-nowrap">Review now →</span>
+        </Link>
+      )}
+
       {categories.map((cat) => {
         const catLessons = getLessonsByCategory(cat.key)
         if (catLessons.length === 0) return null
@@ -52,7 +90,7 @@ export default function HomePage() {
               <h2 className="text-lg font-semibold">{cat.name}</h2>
             </div>
             <p className="text-sm text-ink-900/50 mb-3">{cat.description}</p>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {catLessons.map((lesson) => (
                 <LessonCard key={lesson.id} lesson={lesson} />
               ))}

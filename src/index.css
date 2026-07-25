@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Poppins", "Segoe UI", system-ui, Roboto, sans-serif;
   --color-saffron-50: #fff8ec;
@@ -11,7 +13,23 @@
   --color-teal-500: #0f9d8e;
   --color-teal-600: #0b7f73;
   --color-teal-700: #0a655c;
+  --color-gold-400: #f2c94c;
+  --color-gold-500: #e0ac1f;
   --color-ink-900: #14201e;
+  --color-surface: #ffffff;
+  --color-page-from: #fdfbf6;
+  --color-page-to: #f4f7f5;
+}
+
+:root.dark {
+  --color-ink-900: #eef2f1;
+  --color-surface: #1b2422;
+  --color-page-from: #0f1615;
+  --color-page-to: #121a18;
+  --color-teal-50: #123330;
+  --color-teal-100: #14413c;
+  --color-saffron-50: #2b230f;
+  --color-saffron-100: #3a2e12;
 }
 
 html {
@@ -20,10 +38,76 @@ html {
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #fdfbf6 0%, #f4f7f5 100%);
+  background: linear-gradient(180deg, var(--color-page-from) 0%, var(--color-page-to) 100%);
   color: var(--color-ink-900);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .kannada-text {
   font-family: "Noto Sans Kannada", "Tunga", sans-serif;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s ease both;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(320px) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 14px;
+  animation: confetti-fall 1.4s ease-in forwards;
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+  }
+}
+
+.animate-flame {
+  animation: flame-flicker 1.2s ease-in-out infinite;
 }

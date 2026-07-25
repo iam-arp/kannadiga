@@ -14,12 +14,12 @@ export default function VocabList({ lesson }) {
       <p className="text-sm text-ink-900/60 mb-4">
         Tap a card to flip it. Use 🔈 to hear the pronunciation.
       </p>
-      <div className="grid sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {lesson.vocab.map((item, i) => (
           <div
             key={i}
             onClick={() => toggleFlip(i)}
-            className="cursor-pointer rounded-xl border border-black/5 bg-white p-4 shadow-sm hover:shadow-md transition min-h-[104px] flex flex-col justify-between"
+            className="cursor-pointer rounded-xl border border-ink-900/10 bg-surface p-4 shadow-sm hover:shadow-md transition min-h-[104px] flex flex-col justify-between"
           >
             {!flipped[i] ? (
               <>
@@ -33,7 +33,7 @@ export default function VocabList({ lesson }) {
               </>
             ) : (
               <>
-                <p className="font-medium text-teal-700">{item.english}</p>
+                <p className="font-medium text-teal-600">{item.english}</p>
                 {item.note && <p className="text-xs text-ink-900/50 mt-2">{item.note}</p>}
               </>
             )}
@@ -44,7 +44,7 @@ export default function VocabList({ lesson }) {
         type="button"
         onClick={() => markVocabDone(lesson.id)}
         disabled={done}
-        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-100 disabled:text-teal-600 transition"
+        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-500/15 disabled:text-teal-600 transition"
       >
         {done ? '✓ Vocab reviewed' : "I've reviewed all the vocab"}
       </button>

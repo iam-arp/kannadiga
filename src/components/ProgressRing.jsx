@@ -1,4 +1,4 @@
-export default function ProgressRing({ completed, total, size = 40 }) {
+export default function ProgressRing({ completed, total, size = 40, trackClassName = 'text-ink-900/10', labelClassName = 'text-ink-900' }) {
   const radius = size / 2 - 4
   const circumference = 2 * Math.PI * radius
   const fraction = total === 0 ? 0 : completed / total
@@ -11,8 +11,9 @@ export default function ProgressRing({ completed, total, size = 40 }) {
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="#e6e1d8"
+        stroke="currentColor"
         strokeWidth="4"
+        className={trackClassName}
       />
       <circle
         cx={size / 2}
@@ -34,7 +35,8 @@ export default function ProgressRing({ completed, total, size = 40 }) {
         textAnchor="middle"
         fontSize={size * 0.28}
         fontWeight="600"
-        fill="#14201e"
+        fill="currentColor"
+        className={labelClassName}
       >
         {completed}/{total}
       </text>

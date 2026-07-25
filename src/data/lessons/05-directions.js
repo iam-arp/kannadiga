@@ -1,10 +1,20 @@
 export default {
   id: 'asking-directions',
-  order: 5,
+  order: 6,
   category: 'Getting Around',
   emoji: '🧭',
   title: 'Asking for Directions',
   scenario: "You're on foot and need to find a place — asking a passerby or shopkeeper for directions.",
+  difficulty: 'Beginner',
+  estimatedMinutes: 10,
+  grammarTip: {
+    title: 'Ordinal numbers: modalane, eradane...',
+    body: '"Modalane" (first), "eradane" (second), "moorane" (third) are formed by adding -ane to the number stem. They always come before the direction word: "modalane edakke" = "at the first left".',
+  },
+  cultureNote: {
+    title: 'Landmarks beat street names',
+    body: 'Bangalore directions are almost always landmark-based — "past the temple", "near the big tree", "opposite the medical store" — rather than street names or addresses. Learning a few landmark words (angadi=shop, gudi=temple, signal) goes further than any map app.',
+  },
   vocab: [
     { kannada: 'ಎಲ್ಲಿದೆ?', translit: 'Ellide?', english: 'Where is it?' },
     { kannada: 'ಹತ್ತಿರ', translit: 'Hattira', english: 'Near' },
@@ -16,6 +26,9 @@ export default {
     { kannada: 'ಪಕ್ಕದಲ್ಲಿ', translit: 'Pakkadalli', english: 'Beside / next to' },
     { kannada: 'ಎದುರುಗಡೆ', translit: 'Edurugade', english: 'Opposite / across from' },
     { kannada: 'ದಾರಿ ಗೊತ್ತಿಲ್ಲ', translit: 'Daari gottilla', english: "I don't know the way" },
+    { kannada: 'ಗುಡಿ', translit: 'Gudi', english: 'Temple', note: 'Common landmark used for directions' },
+    { kannada: 'ಮೂಲೆಯಲ್ಲಿ', translit: 'Mooleyalli', english: 'At the corner' },
+    { kannada: 'ದಾರಿ ತಪ್ಪಿಸ್ಕೊಂಡೆ', translit: 'Daari tappiskonde', english: "I've lost my way" },
   ],
   conversation: [
     { speaker: 'You', kannada: 'ಕ್ಷಮಿಸಿ, ಹತ್ರ ಬಸ್ ಸ್ಟಾಪ್ ಎಲ್ಲಿದೆ?', translit: 'Kshamisi, hatra bus stop ellide?', english: 'Excuse me, where is the nearest bus stop?' },
@@ -24,18 +37,25 @@ export default {
     { speaker: 'Passerby', kannada: 'ದೂರ ಇಲ್ಲ, ಹತ್ತಿರಾನೇ ಇದೆ. ಐದು ನಿಮಿಷ ನಡೆಯಬೇಕು.', translit: 'Doora illa, hattiraane ide. Aidu nimisha nadeyabeku.', english: "It's not far, quite near. You'll need to walk five minutes." },
     { speaker: 'You', kannada: 'ಅಂಗಡಿ ಪಕ್ಕದಲ್ಲಿ ಇದ್ಯಾ?', translit: 'Angadi pakkadalli idya?', english: 'Is it beside the shop?' },
     { speaker: 'Passerby', kannada: 'ಹೌದು, ಆ ಅಂಗಡಿ ಎದುರುಗಡೆನೇ ಬಸ್ ಸ್ಟಾಪ್ ಇರೋದು.', translit: 'Haudu, aa angadi edurugadene bus stop irodu.', english: 'Yes, the bus stop is right opposite that shop.' },
-    { speaker: 'You', kannada: 'ಧನ್ಯವಾದಗಳು!', translit: 'Dhanyavaadagalu!', english: 'Thank you!' },
+    { speaker: 'You', kannada: 'ಗುಡಿ ಹತ್ರ ಮೊದಲನೇ ಎಡಕ್ಕೆ ತಿರುಗಬೇಕಾ?', translit: 'Gudi hatra modalane edakke tirugabekaa?', english: 'Do I need to turn at the first left near the temple?' },
+    { speaker: 'Passerby', kannada: 'ಇಲ್ಲ, ಗುಡಿ ದಾಟಿ ಮೂಲೆಯಲ್ಲಿ ಎರಡನೇ ಬಲಕ್ಕೆ ತಿರುಗಿ.', translit: 'Illa, gudi daati mooleyalli eradane balakke tirugi.', english: 'No, pass the temple and turn second right at the corner.' },
+    { speaker: 'You', kannada: 'ಸರಿ, ಧನ್ಯವಾದಗಳು!', translit: 'Sari, dhanyavaadagalu!', english: 'Okay, thank you!' },
   ],
   quiz: [
     { type: 'mcq', question: '"Seeda hogi" means:', options: ['Turn left', 'Go straight', 'Stop here', 'Come back'], answer: 1 },
     { type: 'mcq', question: '"Edurugade" means:', options: ['Beside', 'Far', 'Opposite / across from', 'Near'], answer: 2 },
     { type: 'mcq', question: 'If someone says "Daari gottilla", they mean:', options: ["I don't know the way", 'The way is near', 'Go straight', 'Turn right'], answer: 0 },
+    { type: 'mcq', question: '"Modalane edakke" means:', options: ['Second right', 'First left', 'At the corner', 'Near the signal'], answer: 1 },
     { type: 'fill', question: 'Translate to Kannada (transliteration): "Near the signal"', answer: 'Signal hatra' },
     { type: 'fill', question: 'Translate to Kannada (transliteration): "Beside / next to"', answer: 'Pakkadalli' },
+    { type: 'truefalse', question: '"Gudi" means temple, and it is commonly used as a landmark when giving directions.', answer: true },
+    { type: 'truefalse', question: '"Daari tappiskonde" means "I know the way well".', answer: false, explanation: 'It means "I\'ve lost my way" — the opposite meaning.' },
   ],
   dictation: [
     { kannada: 'ಸೀದಾ ಹೋಗಿ', translit: 'Seeda hogi', english: 'Go straight' },
     { kannada: 'ಸಿಗ್ನಲ್ ಹತ್ರ ಬಲಕ್ಕೆ ತಿರುಗಿ', translit: 'Signal hatra balakke tirugi', english: 'Turn right near the signal' },
     { kannada: 'ದೂರ ಇಲ್ಲ, ಹತ್ತಿರಾನೇ ಇದೆ', translit: 'Doora illa, hattiraane ide', english: "It's not far, it's quite near" },
+    { kannada: 'ದಾರಿ ಗೊತ್ತಿಲ್ಲ', translit: 'Daari gottilla', english: "I don't know the way" },
+    { kannada: 'ಮೂಲೆಯಲ್ಲಿ', translit: 'Mooleyalli', english: 'At the corner' },
   ],
 }

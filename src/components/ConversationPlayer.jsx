@@ -16,8 +16,8 @@ export default function ConversationPlayer({ lesson }) {
             key={i}
             className={`flex gap-3 p-3 rounded-xl border ${
               line.speaker === 'You'
-                ? 'bg-teal-50 border-teal-100 ml-0 mr-0'
-                : 'bg-white border-black/5'
+                ? 'bg-teal-500/10 border-teal-500/20 ml-0 mr-0'
+                : 'bg-surface border-ink-900/10'
             }`}
           >
             <SpeakButton text={line.kannada} size="sm" />
@@ -36,7 +36,7 @@ export default function ConversationPlayer({ lesson }) {
         type="button"
         onClick={() => markConversationDone(lesson.id)}
         disabled={done}
-        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-100 disabled:text-teal-600 transition"
+        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-500/15 disabled:text-teal-600 transition"
       >
         {done ? '✓ Conversation reviewed' : "I've gone through the conversation"}
       </button>
