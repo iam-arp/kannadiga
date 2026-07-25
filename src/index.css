@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Segoe UI", system-ui, Roboto, sans-serif;
+  --color-saffron-50: #fff8ec;
+  --color-saffron-100: #ffedc9;
+  --color-saffron-500: #f5941f;
+  --color-saffron-600: #e07a0a;
+  --color-teal-50: #eefbf8;
+  --color-teal-100: #d1f3ec;
+  --color-teal-500: #0f9d8e;
+  --color-teal-600: #0b7f73;
+  --color-teal-700: #0a655c;
+  --color-ink-900: #14201e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #fdfbf6 0%, #f4f7f5 100%);
+  color: var(--color-ink-900);
+}
+
+.kannada-text {
+  font-family: "Noto Sans Kannada", "Tunga", sans-serif;
+}
