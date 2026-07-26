@@ -29,7 +29,7 @@ export default function Navbar() {
   }, [progress, cards])
 
   return (
-    <header className="sticky top-0 z-10 bg-surface/80 backdrop-blur border-b border-ink-900/10">
+    <header className="sticky top-0 z-10 bg-surface/70 backdrop-blur-xl backdrop-saturate-150 border-b border-ink-900/10">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <NavLink to="/" className="flex items-center gap-2 font-semibold text-lg shrink-0">
           <span className="text-2xl">ಕ</span>

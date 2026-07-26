@@ -62,20 +62,20 @@ export default function ProgressPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-sm flex items-center gap-4">
+        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-elevate flex items-center gap-4">
           <ProgressRing completed={completedLessons.length} total={lessons.length} size={52} />
           <div>
             <p className="text-2xl font-bold">{completedLessons.length}/{lessons.length}</p>
             <p className="text-sm text-ink-900/50">Lessons completed</p>
           </div>
         </div>
-        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-elevate">
           <p className="text-2xl font-bold text-teal-600">
             {quizAccuracy != null ? `${quizAccuracy}%` : '—'}
           </p>
           <p className="text-sm text-ink-900/50">Quiz accuracy (best scores)</p>
         </div>
-        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-sm">
+        <div className="rounded-2xl bg-surface border border-ink-900/10 p-5 shadow-elevate">
           <p className="text-2xl font-bold text-saffron-500">
             {dictationAccuracy != null ? `${dictationAccuracy}%` : '—'}
           </p>

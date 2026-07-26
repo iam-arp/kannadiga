@@ -29,7 +29,7 @@ export default function HomePage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <section className="rounded-3xl bg-gradient-to-br from-teal-600 to-teal-700 text-white p-8 sm:p-10 shadow-lg mb-8">
+      <section className="rounded-3xl bg-gradient-to-br from-teal-600 to-teal-700 text-white p-8 sm:p-10 shadow-elevate-lg mb-8">
         <p className="uppercase tracking-widest text-teal-100 text-xs font-semibold mb-2">
           ನಮ್ಮ ಬೆಂಗಳೂರು ಕನ್ನಡ
         </p>

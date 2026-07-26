@@ -12,6 +12,7 @@ export default function LessonCard({ lesson }) {
   const { getLessonProgress } = useProgress()
   const p = getLessonProgress(lesson.id)
   const completed = [
+    p.lessonDone,
     p.vocabDone,
     p.conversationDone,
     p.pronunciationDone,
@@ -22,7 +23,7 @@ export default function LessonCard({ lesson }) {
   return (
     <Link
       to={`/lesson/${lesson.id}`}
-      className="group flex items-center gap-4 p-4 rounded-2xl bg-surface border border-ink-900/10 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+      className="group flex items-center gap-4 p-4 rounded-2xl bg-surface border border-ink-900/10 shadow-elevate hover:shadow-elevate-lg hover:-translate-y-0.5 transition"
     >
       <div className="text-3xl">{lesson.emoji}</div>
       <div className="flex-1 min-w-0">
@@ -43,7 +44,7 @@ export default function LessonCard({ lesson }) {
           )}
         </div>
       </div>
-      <ProgressRing completed={completed} total={5} />
+      <ProgressRing completed={completed} total={6} />
     </Link>
   )
 }

@@ -5,6 +5,7 @@ const STORAGE_KEY = 'kannadiga-progress'
 const listeners = new Set()
 
 const XP = {
+  lesson: 15,
   vocab: 15,
   conversation: 15,
   pronunciation: 20,
@@ -46,10 +47,11 @@ function updateLesson(lessonId, patch) {
   writeStore(next)
 }
 
-// A lesson counts as fully complete once all five activities are done.
+// A lesson counts as fully complete once all six activities are done.
 function isFullyDone(p) {
   return !!(
     p &&
+    p.lessonDone &&
     p.vocabDone &&
     p.conversationDone &&
     p.pronunciationDone &&
@@ -76,6 +78,10 @@ function completeActivity(lessonId, activityKey, extraPatch, xpAmount) {
 
 export function useProgress() {
   const store = useSyncExternalStore(subscribe, getSnapshot)
+
+  const markLessonRead = useCallback((lessonId) => {
+    completeActivity(lessonId, 'lessonDone', {}, XP.lesson)
+  }, [])
 
   const markVocabDone = useCallback((lessonId) => {
     completeActivity(lessonId, 'vocabDone', {}, XP.vocab)
@@ -122,6 +128,7 @@ export function useProgress() {
 
   return {
     progress: store,
+    markLessonRead,
     markVocabDone,
     markConversationDone,
     markPronunciationDone,

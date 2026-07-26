@@ -47,7 +47,7 @@ export default function DictationExercise({ lesson }) {
 
   if (finished) {
     return (
-      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-elevate">
         <p className="text-4xl mb-2">{correctCount === lesson.dictation.length ? '🎧' : '✍️'}</p>
         <h3 className="text-xl font-semibold">
           You got {correctCount} / {lesson.dictation.length} right
@@ -60,7 +60,7 @@ export default function DictationExercise({ lesson }) {
         <button
           type="button"
           onClick={restart}
-          className="mt-5 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+          className="mt-5 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
         >
           Retry dictation
         </button>
@@ -73,7 +73,7 @@ export default function DictationExercise({ lesson }) {
       <p className="text-sm text-ink-900/60 mb-4">
         Listen and type what you hear, using English letters (transliteration).
       </p>
-      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-elevate">
         <p className="text-xs uppercase tracking-wide text-ink-900/40 mb-3">
           Phrase {index + 1} of {lesson.dictation.length}
         </p>
@@ -120,7 +120,7 @@ export default function DictationExercise({ lesson }) {
               type="button"
               onClick={handleCheck}
               disabled={!value.trim()}
-              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:opacity-40 transition"
+              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] disabled:opacity-40 transition"
             >
               Check
             </button>
@@ -128,7 +128,7 @@ export default function DictationExercise({ lesson }) {
             <button
               type="button"
               onClick={handleNext}
-              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
             >
               {isLast ? 'Finish' : 'Next →'}
             </button>

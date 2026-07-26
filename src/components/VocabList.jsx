@@ -19,7 +19,7 @@ export default function VocabList({ lesson }) {
           <div
             key={i}
             onClick={() => toggleFlip(i)}
-            className="cursor-pointer rounded-xl border border-ink-900/10 bg-surface p-4 shadow-sm hover:shadow-md transition min-h-[104px] flex flex-col justify-between"
+            className="cursor-pointer rounded-2xl border border-ink-900/10 bg-surface p-4 shadow-elevate hover:shadow-elevate-lg hover:-translate-y-0.5 active:scale-[0.98] transition min-h-[104px] flex flex-col justify-between"
           >
             {!flipped[i] ? (
               <>
@@ -44,7 +44,7 @@ export default function VocabList({ lesson }) {
         type="button"
         onClick={() => markVocabDone(lesson.id)}
         disabled={done}
-        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-500/15 disabled:text-teal-600 transition"
+        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] disabled:bg-teal-500/15 disabled:text-teal-600 transition"
       >
         {done ? '✓ Vocab reviewed' : "I've reviewed all the vocab"}
       </button>

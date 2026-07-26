@@ -54,7 +54,7 @@ export default function QuizRunner({ lesson }) {
 
   if (finished) {
     return (
-      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-elevate">
         <p className="text-4xl mb-2">{correctCount === lesson.quiz.length ? '🎉' : '📝'}</p>
         <h3 className="text-xl font-semibold">
           You scored {correctCount} / {lesson.quiz.length}
@@ -65,7 +65,7 @@ export default function QuizRunner({ lesson }) {
         <button
           type="button"
           onClick={restart}
-          className="mt-5 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+          className="mt-5 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
         >
           Retry quiz
         </button>
@@ -78,7 +78,7 @@ export default function QuizRunner({ lesson }) {
       <p className="text-sm text-ink-900/60 mb-4">
         Question {index + 1} of {lesson.quiz.length}
       </p>
-      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-sm">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-6 shadow-elevate">
         <p className="font-medium text-lg mb-4">{question.question}</p>
 
         {question.type === 'mcq' && (
@@ -171,7 +171,7 @@ export default function QuizRunner({ lesson }) {
               type="button"
               onClick={handleSubmit}
               disabled={needsSelection ? selected === null : !fillValue.trim()}
-              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:opacity-40 transition"
+              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] disabled:opacity-40 transition"
             >
               Check answer
             </button>
@@ -179,7 +179,7 @@ export default function QuizRunner({ lesson }) {
             <button
               type="button"
               onClick={handleNext}
-              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+              className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
             >
               {isLast ? 'Finish quiz' : 'Next question →'}
             </button>

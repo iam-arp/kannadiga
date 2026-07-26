@@ -36,7 +36,7 @@ export default function ConversationPlayer({ lesson }) {
         type="button"
         onClick={() => markConversationDone(lesson.id)}
         disabled={done}
-        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 disabled:bg-teal-500/15 disabled:text-teal-600 transition"
+        className="mt-6 px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] disabled:bg-teal-500/15 disabled:text-teal-600 transition"
       >
         {done ? '✓ Conversation reviewed' : "I've gone through the conversation"}
       </button>

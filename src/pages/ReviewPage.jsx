@@ -62,7 +62,7 @@ export default function ReviewPage() {
         </p>
         <Link
           to="/"
-          className="inline-block px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+          className="inline-block px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
         >
           Browse lessons
         </Link>
@@ -83,7 +83,7 @@ export default function ReviewPage() {
         </p>
         <Link
           to="/"
-          className="inline-block px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+          className="inline-block px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
         >
           Browse lessons
         </Link>
@@ -100,7 +100,7 @@ export default function ReviewPage() {
         <div className="flex gap-3 justify-center">
           <Link
             to="/"
-            className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+            className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
           >
             Back to lessons
           </Link>
@@ -140,7 +140,7 @@ export default function ReviewPage() {
         words you're still learning.
       </p>
 
-      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-sm animate-fade-in-up">
+      <div className="rounded-2xl bg-surface border border-ink-900/10 p-8 text-center shadow-elevate animate-fade-in-up">
         <p className="text-xs uppercase tracking-wide text-ink-900/40 mb-3">{card.lessonTitle}</p>
         <div className="flex items-center justify-center gap-3 mb-2">
           <span className="kannada-text text-3xl font-medium">{card.kannada}</span>
@@ -154,7 +154,7 @@ export default function ReviewPage() {
           <button
             type="button"
             onClick={() => setRevealed(true)}
-            className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition"
+            className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 active:scale-[0.98] transition"
           >
             Reveal meaning
           </button>

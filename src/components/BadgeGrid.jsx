@@ -10,7 +10,16 @@ export default function BadgeGrid() {
   const ctx = {
     lessons,
     progress: progress.lessons,
-    isComplete: (p) => !!(p && p.vocabDone && p.conversationDone && p.pronunciationDone && p.quizDone && p.dictationDone),
+    isComplete: (p) =>
+      !!(
+        p &&
+        p.lessonDone &&
+        p.vocabDone &&
+        p.conversationDone &&
+        p.pronunciationDone &&
+        p.quizDone &&
+        p.dictationDone
+      ),
     streak,
     level,
   }
@@ -24,7 +33,7 @@ export default function BadgeGrid() {
             key={badge.id}
             className={`rounded-2xl border p-4 text-center transition ${
               unlocked
-                ? 'bg-surface border-ink-900/10 shadow-sm'
+                ? 'bg-surface border-ink-900/10 shadow-elevate'
                 : 'bg-ink-900/5 border-ink-900/5 opacity-50'
             }`}
           >

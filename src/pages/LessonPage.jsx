@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { getLesson, getAdjacentLessons } from '../data/lessons'
 import { useProgress } from '../hooks/useProgress'
+import LessonTeaching from '../components/LessonTeaching'
 import VocabList from '../components/VocabList'
 import ConversationPlayer from '../components/ConversationPlayer'
 import PronunciationPractice from '../components/PronunciationPractice'
@@ -12,6 +13,7 @@ import SpeedControl from '../components/SpeedControl'
 import Confetti from '../components/Confetti'
 
 const TABS = [
+  { key: 'lesson', label: 'Lesson', icon: '📖' },
   { key: 'vocab', label: 'Vocab', icon: '📚' },
   { key: 'conversation', label: 'Conversation', icon: '💬' },
   { key: 'pronunciation', label: 'Pronunciation', icon: '🎙️' },
@@ -28,13 +30,14 @@ const DIFFICULTY_STYLES = {
 export default function LessonPage() {
   const { lessonId } = useParams()
   const lesson = getLesson(lessonId)
-  const [tab, setTab] = useState('vocab')
+  const [tab, setTab] = useState('lesson')
   const { getLessonProgress } = useProgress()
   const [celebration, setCelebration] = useState(0)
   const wasFullyDone = useRef(false)
 
   const progress = lesson ? getLessonProgress(lesson.id) : {}
   const doneMap = {
+    lesson: progress.lessonDone,
     vocab: progress.vocabDone,
     conversation: progress.conversationDone,
     pronunciation: progress.pronunciationDone,
@@ -117,6 +120,7 @@ export default function LessonPage() {
         </div>
       )}
 
+      {tab === 'lesson' && <LessonTeaching lesson={lesson} onContinue={() => setTab('vocab')} />}
       {tab === 'vocab' && <VocabList lesson={lesson} />}
       {tab === 'conversation' && <ConversationPlayer lesson={lesson} />}
       {tab === 'pronunciation' && <PronunciationPractice lesson={lesson} />}
